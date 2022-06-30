@@ -41,7 +41,7 @@ def display_image(filename):
 	return redirect(url_for('static', filename='uploads/' + filename), code=301)
 
 
-in_img = '../example_images/figure3.jpg' 
+in_img = './example_images/figure3.jpg' 
 out_dir = '.'
 upgraded_model = 0
 gamut_mapping = 2
