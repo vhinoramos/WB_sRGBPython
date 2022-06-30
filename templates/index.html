@@ -1,0 +1,76 @@
+<!-- <!DOCTYPE html>
+<html>
+  <head>
+    <title>Image Processing</title>
+  </head>
+
+  <body>
+    <h1 class="text-center">Image Processing</h1>
+    <form
+      class="p-3 text-center"
+      action="/"
+      method="post"
+      enctype="multipart/form-data"
+    >
+      <input class="form-control" type="file" name="imagefile" />
+      <input class="btn btn-primary mt-3" type="submit" value="Enhance Image" />
+    </form>
+    <img src={{ url_for('static',filename='pferson_folder/000_1.jpg') }}>
+  </body>
+</html> -->
+
+<!doctype html>
+<header>
+    <title>Python Flask File Upload Example</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootsrap.min.css" rel="stylesheet">
+</header>
+<h2 style="text-align:center;">Correcting Improperly White-Balanced Images</h2>
+<h2>Select a file to upload</h2>
+<p>
+	{% with messages = get_flashed_messages() %}
+	  {% if messages %}
+		<ul>
+		{% for message in messages %}
+		  <li>{{ message }}</li>
+		{% endfor %}
+		</ul>
+	  {% endif %}
+	{% endwith %}
+</p>
+{% if filename %}
+	<div>
+        <div style="text-align:center;">
+            <img style = "max-width: 100%; height: auto; align-self: center;" src="{{ url_for('display_image', filename=filename) }}">
+            <h1>Before</h1>
+        </div>
+
+        <div style="text-align:center;">
+            <img style = "max-width: 100%; height: auto; align-self: center;" src="{{ url_for('static',filename = 'uploads/result.jpg') }}">
+            <h2>Result</h2>
+        </div>
+	</div>
+{% endif %}
+<form method="post" action="/" enctype="multipart/form-data">
+    <dl>
+		<p>
+			<input type="file" name="file" autocomplete="off" required style=" background-color: #008CBA; /* Green */
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;">
+		</p>
+    </dl>
+    <p>
+		<input type="submit" value="Submit" style=" background-color: #4CAF50; /* Green */
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;">
+	</p>
+</form>
