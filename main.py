@@ -52,6 +52,8 @@ def display_image(filename):
 	return redirect(url_for('static', filename='uploads/' + 'raw.png'), code=301)
 
 
+
+
 # @app.route('/display/<filename>')
 # def display_image(filename):
 # #print('display_image filename: ' + filename)
