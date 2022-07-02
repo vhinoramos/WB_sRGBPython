@@ -9,7 +9,7 @@ numpy==1.23.0
 opencv-python==4.6.0.66
 Werkzeug==2.1.2
 numpy
-opencv-python
+python3-opencv
 scikit-image
 
 
