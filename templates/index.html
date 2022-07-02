@@ -40,12 +40,12 @@
 {% if filename %}
 	<div>
         <div style="text-align:center;">
-            <img style = "max-width: 100%; height: auto; align-self: center;" src="{{ url_for('display_image', filename=filename) }}">
+            <img style = "max-width: 100%; height: auto; align-self: center;" src="{{ url_for('display_image', filename= filename) }}">
             <h1>Before</h1>
         </div>
 
         <div style="text-align:center;">
-            <img style = "max-width: 100%; height: auto; align-self: center;" src="{{ url_for('static',filename = 'uploads/result.jpg') }}">
+            <img style = "max-width: 100%; height: auto; align-self: center;" src="{{ url_for('static',filename = 'uploads/result.png') }}">
             <h2>Result</h2>
         </div>
 	</div>

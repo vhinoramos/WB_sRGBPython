@@ -6,6 +6,7 @@ import urllib.request
 from flask import Flask, flash, request, redirect, url_for, render_template
 from werkzeug.utils import secure_filename
 
+rawfile='rawfile'
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
 
 def allowed_file(filename):
@@ -26,9 +27,18 @@ def upload_image():
 		return redirect(request.url)
 	if file and allowed_file(file.filename):
 		filename = secure_filename(file.filename)
-		file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-		#print('upload_image filename: ' + filename)
+		file.save(os.path.join(app.config['UPLOAD_FOLDER'], 'raw.png'))
 		flash('Image successfully uploaded and displayed below')
+		in_img = 'static/uploads/raw.png' 
+		out_dir = '.'
+		upgraded_model = 0
+		gamut_mapping = 2
+		imshow = 1 
+		wbModel = wb_srgb.WBsRGB(gamut_mapping=gamut_mapping, upgraded=upgraded_model)
+		os.makedirs(out_dir, exist_ok=True)
+		I = cv2.imread(in_img)  # read the image
+		outImg = wbModel.correctImage(I)  # white balance it
+		cv2.imwrite(out_dir + '/static/uploads/' + 'result.png', outImg * 255)  # save it
 		return render_template('index.html', filename=filename)
 	else:
 		flash('Allowed image types are -> png, jpg, jpeg, gif')
@@ -37,20 +47,9 @@ def upload_image():
 @app.route('/display/<filename>')
 def display_image(filename):
 	#print('display_image filename: ' + filename)
-    
-	return redirect(url_for('static', filename='uploads/' + filename), code=301)
-
-
-in_img = './example_images/figure3.jpg' 
-out_dir = '.'
-upgraded_model = 0
-gamut_mapping = 2
-imshow = 1 
-wbModel = wb_srgb.WBsRGB(gamut_mapping=gamut_mapping, upgraded=upgraded_model)
-os.makedirs(out_dir, exist_ok=True)
-I = cv2.imread(in_img)  # read the image
-outImg = wbModel.correctImage(I)  # white balance it
-cv2.imwrite(out_dir + '/static/uploads/' + 'result.jpg', outImg * 255)  # save it
+	# global rawfile
+	# rawfile='uploads/'+ filename
+	return redirect(url_for('static', filename='uploads/' + 'raw.png'), code=301)
 
 
 # @app.route('/display/<filename>')
